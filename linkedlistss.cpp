@@ -2,18 +2,16 @@
 using namespace std;
 class Node{
     public:
-    int key;
     int data;
     Node* next;
     Node()
     {
-        key=0;
         data=0;
         next=NULL;
     }
-    Node(int k,int d)
+    Node(int d)
     {
-        key=k;
+
         data=d;
     }
 
@@ -43,6 +41,26 @@ class singlylinkedlist{
             cout<<"node appened"<<endl;
         }
     }
+    Node* preppend(Node* n)
+    {
+        
+        n->next=head;
+        head=n;
+        return n;
+
+    }
+    Node* endnode(Node* n)
+    {
+        Node* ptr;
+        ptr=head;
+        while(ptr->next!=NULL)
+        {
+            ptr=ptr->next;
+        }
+        ptr->next=n;
+        return n;
+        
+    }
     void printlist()
     {
         if(head==NULL)
@@ -66,13 +84,15 @@ int main()
 {
     singlylinkedlist s;
     int opt;
-    int key1,data1;
+    int num;
     do{
         cout<<endl;
         cout<<"enter the option"<<endl;
         cout<<"1.to appendnode"<<endl;
         cout<<"2.print the list"<<endl;
-        cout<<"3.exit"<<endl;
+        cout<<"3.to prepend"<<endl;
+        cout<<"4.to endnode"<<endl;
+        cout<<"5.exit"<<endl;
         cin>>opt;
         Node* n1=new Node();
         switch(opt)
@@ -80,15 +100,29 @@ int main()
             case 1:
                 cout<<"appending node value"<<endl;
                 cout<<"enter the key value and data"<<endl;
-                cin>>key1;
-                cin>>data1;
-                n1->key=key1;
-                n1->data=data1;
+            
+                cin>>num;
+        
+                n1->data=num;
                 s.appendnode(n1);
                 break;
             case 2:
                s.printlist();
                break;
+            case 3:
+               cout<<"enter the data to insert before node"<<endl;
+               cin>>num;
+               n1->data=num;
+               s.preppend(n1);
+               break;
+            case 4:
+               cout<<"enter the data to append after node"<<endl;
+               cin>>num;
+               n1->data=num;
+               s.endnode(n1);
+               break;
+
+            
             default:
                 cout<<"enter the valid option"<<endl;                 
 
@@ -96,7 +130,7 @@ int main()
         }
 
     }
-    while(opt!=3);
+    while(opt!=5);
 
 
 }
